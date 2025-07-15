@@ -15,7 +15,7 @@ class GenreController extends Controller
         if($genres->isEmpty()){
             return response()->json([
                 'success' => false,
-                'message' => 'No genre available'
+                'message' => 'No items found'
             ], 404);
         }
 

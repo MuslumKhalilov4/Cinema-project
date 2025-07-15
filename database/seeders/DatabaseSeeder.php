@@ -12,8 +12,11 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $this->call([GenreSeeder::class]);
+        $this->call([
+            GenreSeeder::class,
+            ActorSeeder::class
+        ]);
     }
 }
