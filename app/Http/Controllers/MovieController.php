@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MovieCreateRequest;
+use App\Http\Requests\MovieFilterRequest;
 use App\Http\Requests\MovieUpdateRequest;
 use App\Services\Interfaces\MovieServiceInterface;
 use Illuminate\Http\JsonResponse;
@@ -15,6 +16,16 @@ class MovieController extends Controller
     public function __construct(MovieServiceInterface $movieService)
     {
         $this->movieService = $movieService;
+    }
+
+    public function showAll(MovieFilterRequest $request): JsonResponse
+    {
+        $movies = $this->movieService->getAllMovies($request);
+
+        return response()->json([
+            'success' => true,
+            'data' => $movies
+        ], 200);
     }
 
     public function showSingle($id): JsonResponse
@@ -57,6 +68,6 @@ class MovieController extends Controller
             'success' => true,
             'message' => 'Movie deleted successfully',
             'data' => $movie
-        ]);
+        ], 200);
     }
 }

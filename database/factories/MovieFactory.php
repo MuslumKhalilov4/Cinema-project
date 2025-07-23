@@ -24,7 +24,7 @@ class MovieFactory extends Factory
             'name' => $this->faker->unique()->randomElement($movieNames),
             'description' => $this->faker->paragraph(5),
             'duration' => $this->faker->numberBetween(80, 180),
-            'rating' => $this->faker->randomFloat(1, 1.0, 10.0),
+            'rating' => $this->faker->randomFloat(1, 1.0, 5.0),
             'release_date' => $this->faker->date(),
             'director' => $this->faker->name(),
             'image_path' => 'photo'

@@ -2,11 +2,14 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Http\Requests\MovieCreateRequest;
+use App\Http\Requests\MovieFilterRequest;
 use App\Models\Movie;
+use Illuminate\Database\Eloquent\Collection;
 
 interface MovieRepositoryInterface
 {
+    public function getAll(MovieFilterRequest $request): Collection;
+
     public function find($id): Movie;
 
     public function create($datas): Movie;

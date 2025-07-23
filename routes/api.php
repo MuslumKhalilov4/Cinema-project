@@ -28,6 +28,7 @@ Route::prefix('actor')->group(function(){
 });
 
 Route::prefix('movie')->group(function(){
+    Route::get('/', [MovieController::class, 'showAll']);
     Route::get('/{id}', [MovieController::class, 'showSingle']);
     Route::post('/store', [MovieController::class, 'store']);
     Route::put('/edit/{id}', [MovieController::class, 'edit']);
