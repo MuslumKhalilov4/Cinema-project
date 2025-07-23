@@ -10,4 +10,8 @@ interface MovieRepositoryInterface
     public function find($id): Movie;
 
     public function create($datas): Movie;
+
+    public function update($movie, $datas): Movie;
+
+    public function delete($movie): void;
 }

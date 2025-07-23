@@ -52,7 +52,7 @@ class GenreController extends Controller
         ], 201);
     }
 
-    public function update($id, Request $request): JsonResponse
+    public function edit($id, Request $request): JsonResponse
     {
         $genre = Genre::findOrFail($id);
 
@@ -71,7 +71,7 @@ class GenreController extends Controller
         ], 200);
     }
 
-    public function delete($id):JsonResponse
+    public function destroy($id):JsonResponse
     {
         $genre = Genre::findOrFail($id);
 

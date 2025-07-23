@@ -3,10 +3,12 @@
 namespace App\Services\Implementations;
 
 use App\Http\Requests\MovieCreateRequest;
+use App\Http\Requests\MovieUpdateRequest;
 use App\Models\Movie;
 use App\Repositories\Interfaces\MovieRepositoryInterface;
 use App\Services\FileService;
 use App\Services\Interfaces\MovieServiceInterface;
+use PHPUnit\Framework\MockObject\ClassIsFinalException;
 
 class MovieService implements MovieServiceInterface
 {
@@ -39,5 +41,36 @@ class MovieService implements MovieServiceInterface
         $movie->actors()->attach($request->actors);
 
         return $movie->load(['genres', 'actors']);
+    }
+
+    public function updateMovie(MovieUpdateRequest $request, $id): Movie
+    {
+        $movie = $this->movieRepository->find($id);
+
+        if($request->image){
+            $this->fileService->delete($movie->image_path);
+            $movie->image_path = $this->fileService->upload($request->image);
+
+            $movie->save();
+        }
+
+        $datas = $request->only(['name', 'description', 'duration', 'rating', 'release_date', 'director']);
+        $updated_movie = $this->movieRepository->update($movie, $datas);
+
+        $movie->genres()->sync($request->genres);
+        $movie->actors()->sync($request->actors);
+
+        return $updated_movie->load(['genres', 'actors']);
+    }
+
+    public function deleteMovie($id): Movie
+    {
+        $movie = $this->movieRepository->find($id);
+
+        $this->fileService->delete($movie->image_path);
+
+        $this->movieRepository->delete($movie);
+
+        return $movie;
     }
 }

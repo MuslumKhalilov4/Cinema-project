@@ -64,7 +64,7 @@ class ActorController extends Controller
         ], 201);
     }
 
-    public function update($id, ActorUpdateRequest $request): JsonResponse
+    public function edit($id, ActorUpdateRequest $request): JsonResponse
     {
         $actor = Actor::findOrFail($id);
 
@@ -89,7 +89,7 @@ class ActorController extends Controller
         ], 200);
     }
 
-    public function delete($id): JsonResponse
+    public function destroy($id): JsonResponse
     {
         $actor = Actor::findOrFail($id);
 

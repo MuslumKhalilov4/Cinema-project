@@ -22,4 +22,16 @@ class MovieRepository implements MovieRepositoryInterface
         
         return $movie;
     }
+
+    public function update($movie, $datas): Movie
+    {
+        $movie->update($datas);
+
+        return $movie;
+    }
+
+    public function delete($movie): void
+    {
+        $movie->delete();
+    }
 }

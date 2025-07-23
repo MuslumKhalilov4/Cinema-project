@@ -15,19 +15,21 @@ Route::prefix('genre')->group(function(){
     Route::get('/', [GenreController::class, 'showAll']);
     Route::get('/{id}', [GenreController::class, 'showSingle']);
     Route::post('/store', [GenreController::class, 'store']);
-    Route::put('/update/{id}', [GenreController::class, 'update']);
-    Route::delete('/delete/{id}', [GenreController::class, 'delete']);
+    Route::put('/edit/{id}', [GenreController::class, 'edit']);
+    Route::delete('/destroy/{id}', [GenreController::class, 'destroy']);
 });
 
 Route::prefix('actor')->group(function(){
     Route::get('/', [ActorController::class, 'showAll']);
     Route::get('/{id}', [ActorController::class, 'showSingle']);
     Route::post('/store', [ActorController::class, 'store']);
-    Route::put('/update/{id}', [ActorController::class, 'update']);
-    Route::delete('/delete/{id}', [ActorController::class, 'delete']);
+    Route::put('/edit/{id}', [ActorController::class, 'edit']);
+    Route::delete('/destroy/{id}', [ActorController::class, 'destroy']);
 });
 
 Route::prefix('movie')->group(function(){
     Route::get('/{id}', [MovieController::class, 'showSingle']);
     Route::post('/store', [MovieController::class, 'store']);
+    Route::put('/edit/{id}', [MovieController::class, 'edit']);
+    Route::delete('/destroy/{id}', [MovieController::class, 'destroy']);
 });
