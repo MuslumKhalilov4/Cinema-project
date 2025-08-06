@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\HallController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MovieController;
 use App\Mail\TestMail;
@@ -44,6 +45,14 @@ Route::prefix('language')->group(function(){
     Route::post('/store', [LanguageController::class, 'store']);
     Route::put('/edit/[id}', [LanguageController::class, 'edit']);
     Route::delete('/destroy/{id}', [LanguageController::class, 'destroy']);
+});
+
+Route::prefix('hall')->group(function(){
+    Route::get('/', [HallController::class, 'getAll']);
+    Route::get('/{id}', [HallController::class, 'getSingle']);
+    Route::post('/store', [HallController::class, 'store']);
+    Route::put('/edit/{id}', [HallController::class, 'edit']);
+    Route::delete('/destroy/{id}', [HallController::class, 'destroy']);
 });
 
 Route::get('send-mail', function(){
