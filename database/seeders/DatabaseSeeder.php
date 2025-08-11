@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             ActorSeeder::class,
             MovieSeeder::class,
             LanguageSeeder::class,
-            HallSeeder::class
+            HallSeeder::class,
+            SeatSeeder::class,
         ]);
     }
 }

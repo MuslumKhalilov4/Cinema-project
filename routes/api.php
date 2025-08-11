@@ -5,7 +5,7 @@ use App\Http\Controllers\GenreController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MovieController;
-use App\Mail\TestMail;
+use App\Http\Controllers\SeatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -55,10 +55,12 @@ Route::prefix('hall')->group(function(){
     Route::delete('/destroy/{id}', [HallController::class, 'destroy']);
 });
 
-Route::get('send-mail', function(){
-    $data = ['title' => 'Salam', 'body' => 'test content'];
-
-    Mail::to()->send(new TestMail($data));
-
-    return response()->json(['message' => 'Mail send successfully']);
+Route::prefix('seat')->group(function(){
+    Route::get('/', [SeatController::class, 'getAll']);
+    Route::get('/{id}', [SeatController::class, 'getSingle']);
+    Route::post('/store', [SeatController::class, 'store']);
+    Route::put('/edit/{id}', [SeatController::class, 'edit']);
+    Route::delete('/destroy/{id}', [SeatController::class, 'destroy']);
 });
+
+
