@@ -6,8 +6,8 @@ use App\Http\Controllers\HallController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeatController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -62,5 +62,10 @@ Route::prefix('seat')->group(function(){
     Route::put('/edit/{id}', [SeatController::class, 'edit']);
     Route::delete('/destroy/{id}', [SeatController::class, 'destroy']);
 });
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+
 
 
