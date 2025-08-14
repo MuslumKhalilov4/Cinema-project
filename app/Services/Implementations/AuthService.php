@@ -45,13 +45,13 @@ class AuthService implements AuthServiceInterface
 
     public function login(LoginRequest $request): array
     {
-        $user = User::where('email', $request->email);
+        $user = User::where('email', $request->email)->first();
 
         if(!$user || !Hash::check($request->password, $user->password)){
             throw new AuthenticationException('Email or Password is incorrect!');
         }
 
-        $token = $user->createToken('default');
+        $token = $user->createToken('default')->plainTextToken;
 
         return [
             'user' => $user,

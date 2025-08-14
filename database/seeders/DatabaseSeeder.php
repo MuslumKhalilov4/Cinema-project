@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             HallSeeder::class,
             SeatSeeder::class,
+            RoleSeeder::class,
         ]);
     }
 }
