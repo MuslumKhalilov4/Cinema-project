@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
             $model = class_basename($exception->getModel());
 
             return response()->json([
-                'succes' => false,
+                'success' => false,
                 'message' => "$model not found"
             ], 404);
         }

@@ -8,6 +8,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -69,8 +70,19 @@ Route::middleware('already.authenticated')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::middleware(['auth:sanctum', 'isSuperAdmin'])->prefix('user')->group(function(){
-    Route::get('/', [UserController::class, 'getAll']);
+Route::prefix('user')->group(function () {
+
+    Route::middleware(['auth:sanctum', 'isSuperAdmin'])->group(function () {
+        Route::get('/', [UserController::class, 'getAll']);
+        Route::get('/{id}', [UserController::class, 'getSingle']);
+        Route::post('/make-admin/{id}', [UserController::class, 'makeAdmin']);
+        Route::post('/remove-admin/{id}', [UserController::class, 'removeAdmin']);
+    });
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::put('/edit/{id}', [UserController::class, 'edit']);
+        Route::delete('/destroy/{id}', [UserController::class, 'destroy']);
+    });
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
